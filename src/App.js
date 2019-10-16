@@ -5,9 +5,6 @@ import InputRange from 'react-input-range';
 class App extends React.Component {
   constructor(props) {
     super(props);
- 
-    // this.loanAmt = React.createRef();
-    // this.noOfMonths = React.createRef();
 
     this.state = {
       amtValue: 500,
@@ -47,7 +44,6 @@ class App extends React.Component {
     {
       let sideBarDataString = localStorage.getItem('sideBarData');
       let sideBarData = JSON.parse(sideBarDataString);
-      console.log(sideBarData.length);
       sideBarData.push(searchResult);
       localStorage.setItem('sideBarData',JSON.stringify(sideBarData));
       this.setState({sideBarData:sideBarData});
@@ -74,78 +70,70 @@ class App extends React.Component {
 
    render() {
       return (
-         <div class="container-fluid">
+      <div class="container-fluid">
          <h1 class="h1" style={{textAlign: "center"}}>EMI Calculator</h1>
          <div class="row">
             <div class="main col-8" style={{marginTop: "5%", marginLeft: "2%", border: "1px solid black", padding: "30px"}}>
-            <div class="row">
-              <div class="col-4">
-                  <label>Enter number of months:</label>
-              </div>
-              <div class="col-4 months" >
-              <InputRange ref="noOfMonths" id="noOfMonths" class="noOfMonths" maxValue={24} minValue={6} value={this.state.monthsValue} onChange={monthsValue => this.setState({ monthsValue })} />
-              </div>
-            </div>
-            <div class="row"  style={{marginTop: "5%"}}>
-              <div class="col-4">
-                  <label>Select loan amount: (in $)</label>
-              </div>
-              <div class="col-6 amount">
-                  <InputRange ref="loanAmt" id="loanAmt" class="loanAmt" maxValue={5000} minValue={500} value={this.state.amtValue} onChange={amtValue => this.setState({ amtValue })} />
-              </div>
-            </div>
-            
-            <div class="row"  style={{marginTop: "5%"}}>
-                <div class="col-4">
-                    <label>Interest rate:</label>
-                </div>
-                <div class="col-4" ref="interest">
-                  <input type="text" id="interest" value={this.state.interestRate} style={{border: "none", width:"30px"}}></input>%
-                </div>
-            </div>
-            <div class="row"  style={{marginTop: "5%"}}>
-                <div class="col-4">
-                    <label>Amount to be paid monthly:</label>
-                </div>
-                <div class="col-4" ref="payment">
-                $<input type="text" id="payment" value={this.state.monthlyPayment} style={{border: "none"}}></input>
-                
-                </div>
-            </div>
-            
-            <div class="button" style={{float: "right"}}>
-              <button class="btn btn-primary" onClick={this.calculate}>Check Interest</button>
-            </div>
-          </div>
-        
-            
-            <div class="sidebar col-2" style={{marginTop: "5%", marginLeft: "2%", border: "1px solid black", padding: "30px"}}>
               <div class="row">
-                <div id="collapse" style={{overflowY:"scroll", height:"300px"}}>
-                <table class="table table-hover">
-                <thead>
-                  <th>LoanAmt</th>
-                  <th>Months</th>
-                </thead>
-                <tbody class="smooth-scroll">
-                  
-                    {this.state.sideBarData.map((hits, index) =>(
-                      <tr>
-                      <td key={index} onClick={() => {this.updateSearch(index)}}>{hits.amount}</td>
-                      <td key={index} onClick={() => {this.updateSearch(index)}}>{hits.noOfMonths}</td>
-                      </tr>
-                      ))}
-                  
-                </tbody>
-              </table>
+                <div class="col-4">
+                    <label>Enter number of months:</label>
                 </div>
-
-                
+                <div class="col-4 months" >
+                  <InputRange ref="noOfMonths" id="noOfMonths" class="noOfMonths" maxValue={24} minValue={6} value={this.state.monthsValue} onChange={monthsValue => this.setState({ monthsValue })} />
+                </div>
+              </div>
+              <div class="row"  style={{marginTop: "5%"}}>
+                <div class="col-4">
+                    <label>Select loan amount: (in $)</label>
+                </div>
+                <div class="col-6 amount">
+                    <InputRange ref="loanAmt" id="loanAmt" class="loanAmt" maxValue={5000} minValue={500} value={this.state.amtValue} onChange={amtValue => this.setState({ amtValue })} />
+                </div>
+              </div>
+              <div class="row"  style={{marginTop: "5%"}}>
+                  <div class="col-4">
+                      <label>Interest rate:</label>
+                  </div>
+                  <div class="col-4" ref="interest">
+                    <input type="text" id="interest" value={this.state.interestRate} style={{border: "none", width:"30px"}}></input>%
+                  </div>
+              </div>
+              <div class="row"  style={{marginTop: "5%"}}>
+                  <div class="col-4">
+                      <label>Amount to be paid monthly:</label>
+                  </div>
+                  <div class="col-4" ref="payment">
+                    $<input type="text" id="payment" value={this.state.monthlyPayment} style={{border: "none"}}></input>
+                  </div>
+              </div>
+              <div class="button" style={{float: "right"}}>
+                <button class="btn btn-primary" onClick={this.calculate}>Check Interest</button>
+              </div>
+          </div>
+      
+          <div class="sidebar col-2" style={{marginTop: "5%", marginLeft: "2%", border: "1px solid black", padding: "30px"}}>
+            <div class="row">
+            <h4 class="h4" style={{textAlign: "center"}}>Search Results</h4>
+              <div id="collapse" style={{overflowY:"scroll", height:"300px"}}>
+                <table class="table table-hover">
+                  <thead>
+                    <th>LoanAmt</th>
+                    <th>Months</th>
+                  </thead>
+                  <tbody class="smooth-scroll">
+                      {this.state.sideBarData.map((hits, index) =>(
+                        <tr>
+                          <td key={index} onClick={() => {this.updateSearch(index)}}>{hits.amount}</td>
+                          <td key={index} onClick={() => {this.updateSearch(index)}}>{hits.noOfMonths}</td>
+                        </tr>
+                        ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-           
+      </div>
       );
    }
 }
