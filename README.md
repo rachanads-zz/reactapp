@@ -5,8 +5,7 @@ Design and implement a user interface that allows a user to enter a loan amount 
 
 Cache the recent input values in localstorage and Implement a sidebar which has the history of the loan-amount and duration combinations used before and upon clicking on which the input fields shall be populated and the result is obtained.
 
-## Project is production ready on Heroku
-- [Emi Calculator](https://reactapplication-rachana.herokuapp.com/)
+## Project is production ready on Heroku - [Emi Calculator](https://reactapplication-rachana.herokuapp.com/)
 
 ## Available Scripts
 
